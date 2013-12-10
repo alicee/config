@@ -1,4 +1,0 @@
-! caps lock to escape (but use xinitrc)
-clear Lock
-keycode 66 = Escape
-
