@@ -1,0 +1,5 @@
+[home]
+description = Conditions and Forecast at Home
+metar = http://weather.noaa.gov/pub/data/observations/metar/decoded/KSMO.TXT
+
+
