@@ -65,7 +65,7 @@ cpu_avg_samples 2
 ## Stuff after 'TEXT' will be formatted on screen
 TEXT
 # Free space on /home
-/home${fs_free /home} | \
+/home ${fs_free /home} | \
 # Ethernet status
 # eth0 ${if_up eth0}${addr eth0}${endif} | \
 # Wireless status
@@ -74,7 +74,7 @@ TEXT
 cpu ${cpu cpu1}% at ${freq_g 1}ghz ${exec sensors | grep "Core 0"|awk '{print $3}'} | \
 # RAM in use
 ram ${memperc}% | \
-battery ${battery BAT0} | \
+battery ${battery BAT0}, ${battery_percent BAT0}% | \
 # Weather temperature
 # ${exec weather home --headers="Temperature" -q | awk '/Temperature/ {print $2}'}
 ${exec weather home --headers="Temperature" -q | awk '/Temperature/ {print substr($4,2) "°C (" $2"°F),"}'} ${exec weather home --metric --headers="Sky conditions" -q | awk '/Sky conditions/ {print $3 " " $4}'}| \

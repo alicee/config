@@ -44,7 +44,7 @@ export VIDEO_CARDS='nvidia'
 export PYTHONDONTWRITEBYTECODE=1
 
 # Manpath & Manualpage search order
-export MANSECT=1:2:9:8:3:5:4:7:6:n
+export MANSECT=1:8:2:9:3:5:4:7:6:n
 
 # Syntax highlight for less with 'source-highlite'
 export PAGER='vimpager'
@@ -66,7 +66,6 @@ alias pastebin='wgetpaste -X'
 alias grin='grin -i'
 alias n='cd ~/nearwoo/nearwoo_home && clear'
 alias p='cd ~/pagewoo_source/src && clear'
-alias pacman='yaourt --noconfirm'
 #alias python='python2'
 #alias ipython='ipython2'
 #alias ipy='ipython2'
@@ -129,7 +128,15 @@ alias -s h=vim
 alias -s doc=libreoffice
 alias -s pdf=evince
 alias -s djvu='djview4 -continuous=yes'
-#alias -s py=vim
+alias -s gz=unpack
+alias -s tgz=unpack
+alias -s bz2=unpack
+alias -s tbz=unpack
+alias -s rar=unpack
+alias -s tar=unpack
+alias -s lha=unpack
+alias -s py=vim_or_exec
+
 
 # vi like settings: bindkey -v
 bindkey "^[[H" beginning-of-line
@@ -158,6 +165,61 @@ export HISTIGNORE=ls
 # ---[ Shell functions ]-----------------------------------------------
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
+
+
+function bright () {
+  loc='/sys/class/backlight/acpi_video0/brightness'
+  max=`cat /sys/class/backlight/acpi_video0/max_brightness`
+  min=1
+  current=`cat $loc`
+  if [[ $1 == 'more' && $current -ne $max ]]; then
+    new=$(($current+1))
+  elif [[ $1 == 'less' && $current -ne $min ]]; then
+    new=$(($current -1))
+  else 
+    new=$(($current))
+  fi
+  echo $new | sudo tee /sys/class/backlight/acpi_video0/brightness >> /dev/null
+}
+
+
+function smart_cd () {
+  if [[ -f $1 ]] ; then
+    [[ ! -e ${1:h} ]] && return 1
+    print correcting ${1} to ${1:h}
+    builtin cd ${1:h}
+  else
+    builtin cd ${1}
+  fi
+}
+
+function cd () {
+  setopt localoptions
+  setopt extendedglob
+  local approx1 ; approx1=()
+  local approx2 ; approx2=()
+  if (( ${#*} == 0 )) || [[ ${1} = [+-]* ]] ; then
+    builtin cd "$@"
+  elif (( ${#*} == 1 )) ; then
+    approx1=( (#a1)${1}(N) )
+    approx2=( (#a2)${1}(N) )
+    if [[ -e ${1} ]] ; then
+      smart_cd ${1}
+    elif [[ ${#approx1} -eq 1 ]] ; then
+      print correcting ${1} to ${approx1[1]}
+      smart_cd ${approx1[1]}
+    elif [[ ${#approx2} -eq 1 ]] ; then
+      print correcting ${1} to ${approx2[1]}
+      smart_cd ${approx2[1]}
+    else
+      print couldn\'t correct ${1}
+    fi
+  elif (( ${#*} == 2 )) ; then
+    builtin cd $1 $2
+  else
+    print cd: too many arguments
+  fi
+}
 
 
 #something to be fuxed wcalc 40*90
@@ -302,3 +364,50 @@ function precmd() {
 unsetopt correct_all
 setopt correct
 
+
+function unpack () {
+    local old_dirs current_dirs lower
+    lower=${(L)1}
+    old_dirs=( *(N/) )
+    if [[ $lower == *.tar.gz || $lower == *.tgz ]]; then
+        tar zxfv $1
+    elif [[ $lower == *.gz ]]; then
+        gunzip $1
+    elif [[ $lower == *.tar.bz2 || $lower == *.tbz ]]; then
+        bunzip2 -c $1 | tar xfv -
+    elif [[ $lower == *.bz2 ]]; then
+        bunzip2 $1
+    elif [[ $lower == *.zip ]]; then
+        unzip $1
+    elif [[ $lower == *.rar ]]; then
+        unrar e $1
+    elif [[ $lower == *.tar ]]; then
+        tar xfv $1
+    elif [[ $lower == *.lha ]]; then
+        lha e $1
+    else
+        print "Unknown archive type: $1"
+        return 1
+    fi
+    # Change in to the newly created directory, and
+    # list the directory contents, if there is one.
+    current_dirs=( *(N/) )
+    for i in {1..${#current_dirs}}; do
+        if [[ $current_dirs[$i] != $old_dirs[$i] ]]; then
+            cd $current_dirs[$i]
+            ls
+            break
+        fi
+    done
+}
+
+compdef '_files -g "*.gz *.tgz *.bz2 *.tbz *.zip *.rar *.tar *.lha"' unpack
+
+function vim_or_exec () {
+    interps=($(whence -a "$1"))
+    if [[ -z $interps[2] ]]; then
+        vim "$1"
+    else
+        "$interps[2]" "${@:2}"
+    fi
+}

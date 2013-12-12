@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+loc='/sys/class/backlight/acpi_video0/brightness'
+max=`cat /sys/class/backlight/acpi_video0/max_brightness`
+min=1
+current=`cat $loc`
+if [[ $1 == 'more' && $current -ne $max ]]; then
+  new=$(($current+1))
+elif [[ $1 == 'less' && $current -ne $min ]]; then
+  new=$(($current -1))
+else 
+  new=$(($current))
+fi
+echo $new | sudo tee /sys/class/backlight/acpi_video0/brightness >> /dev/null
