@@ -73,6 +73,10 @@ URxvt*scrollBar_right: false
 ! scrollbar style - rxvt (default), plain, next, or xterm
 URxvt*scrollstyle: rxvt
 
+URxvt*keysym.Home: [[5~
+URxvt*keysym.End: [[6~
+
+
 !! drop in Solarized colorscheme for Xresources/Xdefaults
 
 !!SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB

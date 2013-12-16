@@ -183,44 +183,44 @@ function bright () {
 }
 
 
-function smart_cd () {
-  if [[ -f $1 ]] ; then
-    [[ ! -e ${1:h} ]] && return 1
-    print correcting ${1} to ${1:h}
-    builtin cd ${1:h}
-  else
-    builtin cd ${1}
-  fi
-}
-
-function cd () {
-  setopt localoptions
-  setopt extendedglob
-  local approx1 ; approx1=()
-  local approx2 ; approx2=()
-  if (( ${#*} == 0 )) || [[ ${1} = [+-]* ]] ; then
-    builtin cd "$@"
-  elif (( ${#*} == 1 )) ; then
-    approx1=( (#a1)${1}(N) )
-    approx2=( (#a2)${1}(N) )
-    if [[ -e ${1} ]] ; then
-      smart_cd ${1}
-    elif [[ ${#approx1} -eq 1 ]] ; then
-      print correcting ${1} to ${approx1[1]}
-      smart_cd ${approx1[1]}
-    elif [[ ${#approx2} -eq 1 ]] ; then
-      print correcting ${1} to ${approx2[1]}
-      smart_cd ${approx2[1]}
-    else
-      print couldn\'t correct ${1}
-    fi
-  elif (( ${#*} == 2 )) ; then
-    builtin cd $1 $2
-  else
-    print cd: too many arguments
-  fi
-}
-
+#function smart_cd () {
+#  if [[ -f $1 ]] ; then
+#    [[ ! -e ${1:h} ]] && return 1
+#    print correcting ${1} to ${1:h}
+#    builtin cd ${1:h}
+#  else
+#    builtin cd ${1}
+#  fi
+#}
+#
+#function cd () {
+#  setopt localoptions
+#  setopt extendedglob
+#  local approx1 ; approx1=()
+#  local approx2 ; approx2=()
+#  if (( ${#*} == 0 )) || [[ ${1} = [+-]* ]] ; then
+#    builtin cd "$@"
+#  elif (( ${#*} == 1 )) ; then
+#    approx1=( (#a1)${1}(N) )
+#    approx2=( (#a2)${1}(N) )
+#    if [[ -e ${1} ]] ; then
+#      smart_cd ${1}
+#    elif [[ ${#approx1} -eq 1 ]] ; then
+#      print correcting ${1} to ${approx1[1]}
+#      smart_cd ${approx1[1]}
+#    elif [[ ${#approx2} -eq 1 ]] ; then
+#      print correcting ${1} to ${approx2[1]}
+#      smart_cd ${approx2[1]}
+#    else
+#      print couldn\'t correct ${1}
+#    fi
+#  elif (( ${#*} == 2 )) ; then
+#    builtin cd $1 $2
+#  else
+#    print cd: too many arguments
+#  fi
+#}
+#
 
 #something to be fuxed wcalc 40*90
 # alias calc='nocorrect wcalc'
@@ -253,49 +253,49 @@ function remind () {
 
 # ---[ Terminal settings ]---------------------------------------------
 
-case "$TERM" in
-	linux)
-		bindkey '\e[1~' beginning-of-line	# Home
-		bindkey '\e[4~' end-of-line		# End
-		bindkey '\e[3~' delete-char		# Del
-		bindkey '\e[2~' overwrite-mode		# Insert
-		;;
-	screen)
-		# In Linux console
-		bindkey '\e[1~' beginning-of-line	# Home
-		bindkey '\e[4~' end-of-line		# End
-		bindkey '\e[3~' delete-char		# Del
-		bindkey '\e[2~' overwrite-mode		# Insert
-		bindkey '\e[7~' beginning-of-line	# home
-		bindkey '\e[8~' end-of-line		# end
-		# In rxvt
-		bindkey '\eOc' forward-word		# ctrl cursor right
-		bindkey '\eOd' backward-word		# ctrl cursor left
-		bindkey '\e[3~' backward-delete-char	# This should not be necessary!
-		;;
-	rxvt*)
-		bindkey '\e[7~' beginning-of-line	# home
-		bindkey '\e[8~' end-of-line		# end
-		bindkey '\eOc' forward-word		# ctrl cursor right
-		bindkey '\eOd' backward-word		# ctrl cursor left
-		bindkey '\e[3~' backward-delete-char	# This should not be necessary!
-		bindkey '\e[2~' overwrite-mode		# Insert
-		;;
-	xterm*)
-		bindkey "\e[1~" beginning-of-line	# Home
-		bindkey "\e[4~" end-of-line		# End
-		bindkey '\e[3~' delete-char		# Del
-		bindkey '\e[2~' overwrite-mode		# Insert
-		;;
-	sun)
-		bindkey '\e[214z' beginning-of-line       # Home
-		bindkey '\e[220z' end-of-line             # End
-		bindkey '^J'      delete-char             # Del
-		bindkey '^H'      backward-delete-char    # Backspace
-		eindkey '\e[247z' overwrite-mode          # Insert
-		;;
-esac
-
+#case "$TERM" in
+#	linux)
+#		bindkey '\e[1~' beginning-of-line	# Home
+#		bindkey '\e[4~' end-of-line		# End
+#		bindkey '\e[3~' delete-char		# Del
+#		bindkey '\e[2~' overwrite-mode		# Insert
+#		;;
+#	screen)
+#		# In Linux console
+#		bindkey '\e[1~' beginning-of-line	# Home
+#		bindkey '\e[4~' end-of-line		# End
+#		bindkey '\e[3~' delete-char		# Del
+#		bindkey '\e[2~' overwrite-mode		# Insert
+#		bindkey '\e[7~' beginning-of-line	# home
+#		bindkey '\e[8~' end-of-line		# end
+#		# In rxvt
+#		bindkey '\eOc' forward-word		# ctrl cursor right
+#		bindkey '\eOd' backward-word		# ctrl cursor left
+#		bindkey '\e[3~' backward-delete-char	# This should not be necessary!
+#		;;
+#	rxvt*)
+#		bindkey '\e[7~' beginning-of-line	# home
+#		bindkey '\e[8~' end-of-line		# end
+#		bindkey '\eOc' forward-word		# ctrl cursor right
+#		bindkey '\eOd' backward-word		# ctrl cursor left
+#		bindkey '\e[3~' backward-delete-char	# This should not be necessary!
+#		bindkey '\e[2~' overwrite-mode		# Insert
+#		;;
+#	xterm*)
+#		bindkey "\e[1~" beginning-of-line	# Home
+#		bindkey "\e[4~" end-of-line		# End
+#		bindkey '\e[3~' delete-char		# Del
+#		bindkey '\e[2~' overwrite-mode		# Insert
+#		;;
+#	sun)
+#		bindkey '\e[214z' beginning-of-line       # Home
+#		bindkey '\e[220z' end-of-line             # End
+#		bindkey '^J'      delete-char             # Del
+#		bindkey '^H'      backward-delete-char    # Backspace
+#		eindkey '\e[247z' overwrite-mode          # Insert
+#		;;
+#esac
+#
 
 unsetopt beep
 

@@ -8,4 +8,5 @@ xrdb -merge .Xdefaults
 xmodmap .Xmodmap
 # disable touchpad while typing
 syndaemon -k -i 0.25 -d &
+feh --bg-scale ~/.background
 exec i3 

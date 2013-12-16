@@ -1,2 +1,6 @@
 set completion-ignore-case on
 
+"[[5~": beginning-of-line
+"[[6~": end-of-line
+
+
