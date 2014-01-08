@@ -55,9 +55,8 @@ export LESS=' -R '
 export XDG_DESKTOP_DIR='/tmp'
 export XDG_DOWNLOAD_DIR='/tmp'
 export XDG_VIDEOS_DIR='/tmp'
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64:/usr/lib32
-export GAE_SDK_ROOT=/opt/google-appengine-python
-export PYTHONPATH=$GAE_SDK_ROOT:.
+export PATH=/opt/google-cloud-sdk/bin:$PATH:.
+export GAE_SDK_ROOT=/opt/google-cloud-sdk/platform/google_appengine
 
 eval `dircolors`
 # ---[ Alias Section ]-------------------------------------------------

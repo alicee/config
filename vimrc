@@ -1,5 +1,8 @@
 set completeopt=menuone,longest
 
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=lightgray
+
 let g:jedi#show_call_signatures = "0"
 
 " let g:solarized_contrast = "high"
@@ -17,8 +20,8 @@ let g:syntastic_check_on_wq=0
 let g:syntastic_enable_balloons=1
 let g:syntastic_ignore_files=['^/usr/lib/']
 let g:syntastic_mode_map={ 'mode': 'active',
-                          \ 'active_filetypes': [],
-                          \ 'passive_filetypes': [] }
+                         \ 'active_filetypes': [],
+                         \ 'passive_filetypes': [] }
 " use own config file:
 let g:syntastic_python_pylint_args = '--msg-template="{path}:{line}: [{msg_id}] {msg}" -r n --rcfile=~/.pylintrc'
 
@@ -31,6 +34,7 @@ let g:syntastic_python_checkers = ['pylint']
 
 " always yank to system clipboard as well
 set clipboard=unnamed
+set go+=a
 set mouse=a
 
 " not vi compatible, things like filetype work then
