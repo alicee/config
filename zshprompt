@@ -77,7 +77,11 @@ setprompt () {
 
     # Finally, the prompt.
 
-    PROMPT='$PR_BLUE%m $PR_GREEN%n $PR_WHITE$(prompt_git_info)   $PR_WHITE'
-
+    if [ -z $STY ]
+    then
+        PROMPT='$PR_BLUE%m $PR_GREEN%n $PR_WHITE$(prompt_git_info)   $PR_WHITE'
+    else  
+        PROMPT='$PR_BLUE%m $PR_GREEN%n $PR_WHITE$(prompt_git_info)$PR_BLUE(screen)   $PR_WHITE'
+    fi
 }
 
