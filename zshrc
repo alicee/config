@@ -30,6 +30,10 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTIGNORE=ls
 
+#
+# rtb-woo
+# export 483182638087
+
 
 # Prompt
 . ~/.zshprompt
