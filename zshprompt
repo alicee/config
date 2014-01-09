@@ -76,12 +76,11 @@ setprompt () {
     esac
 
     # Finally, the prompt.
-
     if [ -z $STY ]
     then
         PROMPT='$PR_BLUE%m $PR_GREEN%n $PR_WHITE$(prompt_git_info)   $PR_WHITE'
     else  
-        PROMPT='$PR_BLUE%m $PR_GREEN%n $PR_WHITE$(prompt_git_info)$PR_BLUE(screen)   $PR_WHITE'
+        PROMPT='$PR_BLUE%m $PR_GREEN%n $PR_WHITE$(prompt_git_info) $PR_BLUE($STY)   $PR_WHITE'
     fi
 }
 

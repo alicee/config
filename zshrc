@@ -30,6 +30,10 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTIGNORE=ls
 
+#
+# rtb-woo
+# export 483182638087
+
 
 # Prompt
 . ~/.zshprompt
@@ -68,6 +72,7 @@ alias pastebin='wgetpaste -X'
 alias grin='grin -i'
 alias n='cd ~/nearwoo/nearwoo_home && clear'
 alias p='cd ~/pagewoo_source/src && clear'
+alias rtb='cd ~/pagewoo_rtb/rtb && clear'
 alias python='python2'
 #alias ipython='ipython2'
 #alias ipy='ipython2'
@@ -97,7 +102,8 @@ alias la='ls -a --color=auto'
 alias l='ls --color=auto'
 alias k='ls --color=auto'
 alias ks='ls --color=auto'
-# alias lg='ls | grep -i'
+alias lg='ls | grep -i'
+alias lag='ls -a | grep -i'
 alias -g G='| grep -i'
 # List only directories and symbolic
 # links that point to directories
