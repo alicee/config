@@ -9,4 +9,6 @@ xmodmap .Xmodmap
 # disable touchpad while typing
 syndaemon -k -i 0.25 -d &
 feh --bg-scale ~/.background
+# workaround for non-working systemctl mongodb
+sudo mongod --config /etc/mongodb.conf &
 exec i3 
