@@ -49,6 +49,7 @@ export TZ="America/Los_Angeles" # timezone data
 export DE=kde # for right-click "open with", needed by /usr/bin/xgd-open script
 export VIDEO_CARDS='nvidia'
 export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH=/home/alice/pip_packages
 
 # Manpath & Manualpage search order
 export MANSECT=1:8:2:9:3:5:4:7:6:n
@@ -74,11 +75,11 @@ alias n='cd ~/nearwoo/nearwoo_home && clear'
 alias p='cd ~/pagewoo_source/src && clear'
 alias rtb='cd ~/pagewoo_rtb/rtb && clear'
 alias python='python2'
-#alias ipython='ipython2'
-#alias ipy='ipython2'
-#alias py='python2'
-#alias p2='python2'
-#alias p3='python3'
+alias ipy='ipython'
+alias py='python'
+alias gd='git diff'
+alias gc='git commit'
+alias gch='git checkout'
 alias v='vim $'
 alias cd-='cd -'
 alias zup='source ~/.zshrc'
