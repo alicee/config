@@ -1,6 +1,6 @@
 # --[- System settings ]------------------------------------------------
 limit -s coredumpsize 0
-umask 0027
+umask 002
 
 # doesn't seem to work ...
 # see https://github.com/zsh-users/zsh-syntax-highlighting
