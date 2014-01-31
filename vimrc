@@ -19,17 +19,17 @@ let g:syntastic_async=1
 let g:syntastic_check_on_wq=0
 let g:syntastic_enable_balloons=1
 let g:syntastic_ignore_files=['^/usr/lib/']
-let g:syntastic_mode_map={ 'mode': 'active',
+" let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': [],
                          \ 'passive_filetypes': [] }
 " use own config file:
-let g:syntastic_python_pylint_args = '--msg-template="{path}:{line}: [{msg_id}] {msg}" -r n --rcfile=~/.pylintrc'
+" let g:syntastic_python_pylint_args = '--msg-template="{path}:{line}: [{msg_id}] {msg}" -r n --rcfile=~/.pylintrc'
 
 " rebind f1 calls :SyntasticCheck.
-let g:syntastic_python_checkers = ['pylint']
-:map <special> <F1> :SyntasticCheck<CR>
+" let g:syntastic_python_checkers = ['pylint']
+" :map <special> <F1> :SyntasticCheck<CR>
 " somehow make it work from insert mode too
-:imap <special> <F1> <Escape>:SyntasticCheck<CR>
+" :imap <special> <F1> <Escape>:SyntasticCheck<CR>
 
 
 " always yank to system clipboard as well
@@ -44,7 +44,6 @@ set wrap
 
 " set cindent
 " set autoindent
-
 " disable all the annoying bells and whistles
 set noerrorbells visualbell t_vb=
 

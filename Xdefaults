@@ -14,12 +14,22 @@
 ! scrollback buffer lines - 65535 is max on most machines (64 is default)
 URxvt*saveLines: 65535
 
-! font color (default is black)
-! URxvt*foreground: White
+URxvt.perl-ext-common: ...,url-select,font-size
+URxvt.keysym.M-u: perl:url-select:select_next
+! If true, selected URLs are copied to PRIMARY
+URxvt.url-select.autocopy: true
+! Mouse button to click-open URLs (default: 2)
+URvxt.url-select.button: 2 
+! Browser/command to open selected URL with
+URxvt.url-select.launcher: firefox -new-tab
+! If set to true, all URLs get underlined
+URxvt.url-select.underline: true
 
-! background color (prior to tinting) (default is white)
-! URxvt*background:      Black
-URxvt.perl-ext-common: ...,font-size
+! URxvt.keysym.Tab-c: perl:clipboard:copy
+! URxvt.keysym.Tab-v: perl:clipboard:paste
+! URxvt.keysym.Tab-Shift-v: perl:clipboard:paste_escaped
+
+! URxvt.perl-ext-common: ...,font-size
 URxvt.keysym.Pause:     perl:font-size:increase
 URxvt.keysym.Print:   perl:font-size:decrease
 URxvt.keysym.C-Pause:      perl:font-size:incglobal
@@ -52,8 +62,8 @@ URxvt*boldFont: xft:inconsolata:bold:pixelsize=13:antialias=true:hinting=true
 !URxvt*boldFont: xft:terminus:bold:pixelsize=12:antialias=true:hinting=true
 
 ! Traditional fonts - a more traditional font setup in lieu of xft
- !URxvt*font:-*-courier-medium-r-normal-*-14-*-*-*-*-*-iso8859-1D
- !
+!URxvt*font:-*-courier-medium-r-normal-*-14-*-*-*-*-*-iso8859-1D
+!
 !Uxvt*boldFont:-*-courier-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
 
 ! Replace blue folder colors with a lighter shade for clarity. To
@@ -154,3 +164,7 @@ URxvt*color14:               S_base1
 !!! white dark/light
 URxvt*color7:                S_base2
 URxvt*color15:               S_base3
+
+! Home and End keybindings
+! URxvt*keysym.Home: \033[1~
+! URxvt*keysym.End: \033[4~

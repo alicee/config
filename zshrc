@@ -2,6 +2,12 @@
 limit -s coredumpsize 0
 umask 0027
 
+# doesn't seem to work ...
+# see https://github.com/zsh-users/zsh-syntax-highlighting
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+# ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+
 # ---[ ZSH Options ]----------------------------------------------------
 # General
 setopt ALWAYS_TO_END BASH_AUTO_LIST NO_BEEP CLOBBER
@@ -29,10 +35,6 @@ export HISTCONTROL=ignoredups
 export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTIGNORE=ls
-
-#
-# rtb-woo
-# export 483182638087
 
 
 # Prompt
@@ -151,14 +153,15 @@ alias -s lha=unpack
 alias -s py=vim_or_exec
 
 
-# vi like settings: bindkey -v
-bindkey "^[[H" beginning-of-line
-bindkey "^[[F" end-of-line
-bindkey "^[[3~" backward-delete-char
-bindkey '^p' history-search-backward
-bindkey "^[[A"  history-search-backward
-bindkey "^[[B"  history-search-forward
-
+# vi like settings: 
+bindkey -v
+bindkey -M viins 'Tab' vi-cmd-mode
+# bindkey "^[[H" beginning-of-line
+# bindkey "^[[F" end-of-line
+# bindkey "^[[3~" backward-delete-char
+# bindkey '^p' history-search-backward
+# bindkey "^[[A"  history-search-backward
+# bindkey "^[[B"  history-search-forward
 
 # ---[ Completition system ]-------------------------------------------
 
@@ -211,14 +214,19 @@ rationalise-dot() {
 }
 
 
-function zle-line-init zle-keymap-select {
-#    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-#    RPS2=$RPS1
-    zle reset-prompt
-}
-
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+
+function zle-line-init zle-keymap-select {
+   case $KEYMAP in
+      viins) echo -e "\033[2 q\c";; # steady block
+      main) echo -e "\033[2 q\c";; # steady block
+      vicmd) echo -e "\033[1 q\c";; # blink underline
+   esac
+   zle reset-prompt
+}
+
 
 function chpwd() {
     print -Pn "\e]2;%~\a"
@@ -326,6 +334,5 @@ function remind () {
 
 zle -N rationalise-dot
 bindkey . rationalise-dot
-
 
 # unset config_file
