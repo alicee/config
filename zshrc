@@ -63,7 +63,7 @@ export LESS=' -R '
 export XDG_DESKTOP_DIR='/tmp'
 export XDG_DOWNLOAD_DIR='/tmp'
 export XDG_VIDEOS_DIR='/tmp'
-export PATH=/opt/google-cloud-sdk/bin:$PATH:.
+export PATH=/opt/google-cloud-sdk/bin:$PATH
 export GAE_SDK_ROOT=/opt/google-cloud-sdk/platform/google_appengine
 
 eval `dircolors`
