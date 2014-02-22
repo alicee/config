@@ -57,7 +57,7 @@ export PYTHONPATH=/home/alice/pip_packages
 export MANSECT=1:8:2:9:3:5:4:7:6:n
 
 # Syntax highlight for less with 'source-highlite'
-export PAGER='vimpager'
+export PAGER='less'
 export LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 # prevent firefox and others from compulsively creating Desktop and
