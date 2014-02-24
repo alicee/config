@@ -50,7 +50,6 @@ export SUDO_EDITOR=vim
 export TZ="America/Los_Angeles" # timezone data
 export DE=kde # for right-click "open with", needed by /usr/bin/xgd-open script
 export VIDEO_CARDS='nvidia'
-export PYTHONDONTWRITEBYTECODE=1
 export PYTHONPATH=/home/alice/pip_packages
 
 # Manpath & Manualpage search order
