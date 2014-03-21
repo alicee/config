@@ -189,10 +189,13 @@ autoload -U compinit && compinit -C
 zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
 zmodload -ap zsh/mapfile mapfile
+zmodload zsh/mathfunc
 autoload zcalc
 
 
 # ---[ Functions ]-------------------------------------------------------
+
+zc () { for exp in $argv; do print "$exp = $(( exp ))"; done; }
 
 # show directory in title bar
 chpwd() {
@@ -302,11 +305,6 @@ function bright () {
     new=$(($current))
   fi
   echo $new | sudo tee /sys/class/backlight/acpi_video0/brightness >> /dev/null
-}
-
-
-function calc() {
-  wcalc "$1"
 }
 
 function zzip {
