@@ -51,7 +51,6 @@ export TZ="America/Los_Angeles" # timezone data
 export DE=kde # for right-click "open with", needed by /usr/bin/xgd-open script
 export VIDEO_CARDS='nvidia'
 export PYTHONDONTWRITEBYTECODE=1
-export PYTHONPATH=/home/alice/pip_packages
 
 # Manpath & Manualpage search order
 export MANSECT=1:8:2:9:3:5:4:7:6:n

@@ -1,3 +1,13 @@
 [user]
 	name = Alice Ellmer
 	email = alice.ellmer@gmail.com
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = true
+[master]
+	autosetuprebase = always
+[push]
+	default = simple
+[merge]
+	conflictstyle = diff3
