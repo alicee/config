@@ -70,6 +70,7 @@ export GAE_SDK_ROOT=/opt/google-cloud-sdk/platform/google_appengine
 eval `dircolors`
 
 # ---[ Alias Section ]-------------------------------------------------
+alias top='top -c'
 alias pastebin='wgetpaste -X'
 alias grin='grin -i'
 alias n='cd ~/nearwoo/nearwoo_home && clear'

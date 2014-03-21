@@ -11,3 +11,11 @@
 	default = simple
 [merge]
 	conflictstyle = diff3
+[alias]
+	pl = pull ffonly
+[branch]
+	autosetuprebase = always
+[branch "master"]
+	rebase = true
+[branch "new_woo_site"]
+	rebase = true

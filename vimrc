@@ -31,6 +31,11 @@ let g:syntastic_ignore_files=['^/usr/lib/']
 " somehow make it work from insert mode too
 " :imap <special> <F1> <Escape>:SyntasticCheck<CR>
 
+let g:voom_default_mode='python'
+
+
+" automatically remove trailing whitespace
+autocmd BufWritePre *.py :%s/\s\+$//e
 
 " always yank to system clipboard as well
 set clipboard=unnamed
@@ -78,7 +83,7 @@ set timeoutlen=2000
 
 " fold doxygen comments
 " syntax region DoxComment start="\/\*\!|\/\*\*" end="\*\*\/" transparent fold
-" set foldmethod=syntax
+set foldmethod=marker
 " highlight Folded term=None ctermfg=1 ctermbg=NONE
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
