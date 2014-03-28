@@ -66,6 +66,7 @@ export XDG_DOWNLOAD_DIR='/tmp'
 export XDG_VIDEOS_DIR='/tmp'
 export PATH=/opt/google-cloud-sdk/bin:$PATH:.
 export GAE_SDK_ROOT=/opt/google-cloud-sdk/platform/google_appengine
+export PYTHONPATH=$GAE_SDK_ROOT/google
 
 eval `dircolors`
 
@@ -195,7 +196,7 @@ autoload zcalc
 
 # ---[ Functions ]-------------------------------------------------------
 
-zc () { for exp in $argv; do print "$exp = $(( exp ))"; done; }
+calc () { for exp in $argv; do print "$exp = $(( exp ))"; done; }
 
 # show directory in title bar
 chpwd() {
