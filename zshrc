@@ -334,4 +334,6 @@ function remind () {
 zle -N rationalise-dot
 bindkey . rationalise-dot
 
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 # unset config_file
