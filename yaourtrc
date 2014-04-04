@@ -1,8 +1,12 @@
 # man yaourtrc for details
 
+
 EXPORT=2
 
+
+TMPDIR=$HOME/.yaourt_tmp
+NOCONFIRM=1
 UP_NOCONFIRM=1
 BUILD_NOCONFIRM=1
 EDITFILES=0
-NOENTER=0
+NOENTER=1

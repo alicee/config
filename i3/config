@@ -16,6 +16,7 @@ assign [class="Transmission"] → 8
 assign [class="transmission-gtk"] → 8
 
 exec nm-applet --sm-disable &
+exec xfce4-power-manager &
 workspace_auto_back_and_forth yes
 
 # solarized color scheme

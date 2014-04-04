@@ -1,3 +1,21 @@
 [user]
 	name = Alice Ellmer
 	email = alice.ellmer@gmail.com
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = true
+[master]
+	autosetuprebase = always
+[push]
+	default = simple
+[merge]
+	conflictstyle = diff3
+[alias]
+	pl = pull ffonly
+[branch]
+	autosetuprebase = always
+[branch "master"]
+	rebase = true
+[branch "new_woo_site"]
+	rebase = true

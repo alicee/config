@@ -50,7 +50,6 @@ export SUDO_EDITOR=vim
 export TZ="America/Los_Angeles" # timezone data
 export DE=kde # for right-click "open with", needed by /usr/bin/xgd-open script
 export VIDEO_CARDS='nvidia'
-export PYTHONPATH=/home/alice/pip_packages
 
 # Manpath & Manualpage search order
 export MANSECT=1:8:2:9:3:5:4:7:6:n
@@ -66,10 +65,12 @@ export XDG_DOWNLOAD_DIR='/tmp'
 export XDG_VIDEOS_DIR='/tmp'
 export PATH=/opt/google-cloud-sdk/bin:$PATH
 export GAE_SDK_ROOT=/opt/google-cloud-sdk/platform/google_appengine
+export PYTHONPATH=$GAE_SDK_ROOT/google
 
 eval `dircolors`
 
 # ---[ Alias Section ]-------------------------------------------------
+alias top='top -c'
 alias pastebin='wgetpaste -X'
 alias grin='grin -i'
 alias n='cd ~/nearwoo/nearwoo_home && clear'
@@ -185,10 +186,13 @@ autoload -U compinit && compinit -C
 zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
 zmodload -ap zsh/mapfile mapfile
+zmodload zsh/mathfunc
 autoload zcalc
 
 
 # ---[ Functions ]-------------------------------------------------------
+
+calc () { for exp in $argv; do print "$exp = $(( exp ))"; done; }
 
 # show directory in title bar
 chpwd() {
@@ -300,11 +304,6 @@ function bright () {
   echo $new | sudo tee /sys/class/backlight/acpi_video0/brightness >> /dev/null
 }
 
-
-function calc() {
-  wcalc "$1"
-}
-
 function zzip {
   if [[ $# -eq 1 ]]; then
     zip -r "$1.zip" $1
@@ -331,4 +330,6 @@ function remind () {
 zle -N rationalise-dot
 bindkey . rationalise-dot
 
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 # unset config_file
