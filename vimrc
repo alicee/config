@@ -1,15 +1,15 @@
 
 " The above command will change the 'completeopt' option so that Vim's popup menu doesn't select the first completion item, but rather just inserts the longest common text of all matches; and the menu will come up even if there's only one match. (The longest setting is responsible for the former effect and the menuone is responsible for the latter.) 
-set completeopt=menuone,longest
+" "set completeopt=menuone,longest
 
 " highlight lines with length > 80
 let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=lightgray
 
 
-let g:jedi#show_call_signatures = "0"
+let g:jedi#show_call_signatures="0"
 
-let g:solarized_contrast = "high"
+let g:solarized_contrast="high"
 let g:pymode_rope=0
 
 
