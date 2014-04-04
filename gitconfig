@@ -7,8 +7,6 @@
 	rebase = true
 [master]
 	autosetuprebase = always
-[push]
-	default = simple
 [merge]
 	conflictstyle = diff3
 [alias]
