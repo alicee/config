@@ -1,18 +1,19 @@
-set completeopt=menuone,longest
 
+" The above command will change the 'completeopt' option so that Vim's popup menu doesn't select the first completion item, but rather just inserts the longest common text of all matches; and the menu will come up even if there's only one match. (The longest setting is responsible for the former effect and the menuone is responsible for the latter.) 
+" "set completeopt=menuone,longest
+
+" highlight lines with length > 80
 let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=lightgray
 
-let g:jedi#show_call_signatures = "0"
 
-" let g:solarized_contrast = "high"
+let g:jedi#show_call_signatures="0"
+
+let g:solarized_contrast="high"
 let g:pymode_rope=0
 
-" execute pathogen#infect()
 
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-" let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
+" syntastic settings
 let g:syntastic_auto_loc_list=1
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_async=1
@@ -20,8 +21,8 @@ let g:syntastic_check_on_wq=0
 let g:syntastic_enable_balloons=1
 let g:syntastic_ignore_files=['^/usr/lib/']
 " let g:syntastic_mode_map={ 'mode': 'active',
-                         \ 'active_filetypes': [],
-                         \ 'passive_filetypes': [] }
+"                         \ 'active_filetypes': [],
+"                         \ 'passive_filetypes': [] }
 " use own config file:
 " let g:syntastic_python_pylint_args = '--msg-template="{path}:{line}: [{msg_id}] {msg}" -r n --rcfile=~/.pylintrc'
 
@@ -76,7 +77,6 @@ set shortmess=Ta
 set background=dark
 colorscheme solarized
 
-
 set showmatch
 
 " keymap timeouts
@@ -86,61 +86,11 @@ set timeoutlen=2000
 :command! -range=% -nargs=0 Tab2Space execute "<line1>,<line2>s/^\\t\\+/\\=substitute(submatch(0), '\\t', repeat(' ', ".&ts."), 'g')"
 :command! -range=% -nargs=0 Space2Tab execute "<line1>,<line2>s/^\\( \\{".&ts."\\}\\)\\+/\\=substitute(submatch(0), ' \\{".&ts."\\}', '\\t', 'g')"
 
-set foldmethod=syntax
-
-
-" cscope
-if has('cscope')
-  set cscopetag cscopeverbose
-
-  if has('quickfix')
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-  endif
-
-    cnoreabbrev <expr> csa
-          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs add'  : 'csa')
-    cnoreabbrev <expr> csf
-          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find' : 'csf')
-    cnoreabbrev <expr> csk
-          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs kill' : 'csk')
-    cnoreabbrev <expr> csr
-          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs reset' : 'csr')
-    cnoreabbrev <expr> css
-          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs show' : 'css')
-    cnoreabbrev <expr> csh
-          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs help' : 'csh')
-
-
-  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
-endif
-
-
-" load cscope.out db on startup
-function! LoadCscope()
-    let db = findfile("cscope.out", ".;")
-    if (!empty(db))
-        let path = strpart(db, 0, match(db, "/cscope.out$"))
-        set nocsverb " suppress 'duplicate connection' error
-        exe "cs add " . db . " " . path
-        set csverb   " switch back to verbose mode
-    endif
-endfunction
-au BufEnter /* call LoadCscope()
-
-:vmenu PopUp.Comments.Add :s/^/\/\//<CR>
-:vmenu PopUp.Comments.Remove :s/^..//<CR>
-
-":set fdm=expr
-":set fde=getline(v:lnum)=~'^\\s\/'?1:getline(prevnonblank(v:lnum))=~'^\\s\/'?1:getline(nextnonblank(v:lnum))=~'^\\s*\/'?1:0
-
-" everything that's yanked goes to clipboard
-:set go+=a
+set foldmethod=expr
 
 " in insert mode, press F12 to paste without
 " ugly indentation "
 set pastetoggle=<F12>
-
-" source /home/alice/.vim/autotag.vim
 
 inoremap <F3> <C-O>za
 nnoremap <F3> za
@@ -154,18 +104,11 @@ vnoremap <F4> zF
 
 :filetype plugin indent on
 
-" map leader for c file support
-" let g:C_MapLeader  = ','
-
 set backupdir=~/.vim/tmp
 execute "set directory=". &backupdir
 silent execute '!mkdir -p '. &backupdir
 
-" :command! -nargs=+ Calc :py print <args>
-" :py from math import *
-
 :map align Align
-
 
 " set cmdheight=2
 :command! -nargs=1 Here :silent !here <args>
@@ -175,34 +118,16 @@ silent execute '!mkdir -p '. &backupdir
 " be consistent (go to EOL) with capitalized C and D commands
 nnoremap Y y$
 
-" xlcip usage
-":map <F3> "*y
-":map <F4> "*p
-":map <F5> "*d
-
-" take care of switching comment signs
-"autocmd filetype matlab inoremap // %
-"inoremap /// /* */
-
-set nofoldenable
+" set nofoldenable
 
 " insert mode to command mode
  " imap ii <Esc>:
 
 " normal mode to cmd mode
 nnoremap ff :
+
 "" command mode to normal mode
 "cnoremap ff  <BS> <Esc> <Esc>
-
-" delete and insert on line above
-" nnoremap ddi dd <Esc> O
-
-" search and replace for entire file
-" with sr --> :%s/arg1/arg2/g
-" with src --> :%s/arg1/arg2/gc
-" nnoremap sr
-
-"    :com is -nargs=1 i <args1> Esc
 
 " treat wrapped lines like real lines
 nnoremap <Up> gk
@@ -214,19 +139,14 @@ noremap <F10> :wq<CR>
 :noremap <F3> :set hls!<CR>
 :noremap <F4> :set number!<CR>
 
-" expand braces
-":inoremap {      {}<Left>
-":inoremap {<CR>  {<CR>}<Esc>O
-":inoremap {{     {
-":inoremap {}     {}
-":inoremap [     []<Left>
-":inoremap (     ()<Left>
-":inoremap \"     \"\"<Left>
-":inoremap '     ''<Left>
+" expand non-regular-expression language features
+:inoremap {}     {}<Left>
+:inoremap [     []<Left>
+:inoremap (     ()<Left>
+:inoremap \"     \"\"<Left>
+:inoremap '     ''<Left>
+:inoremap "     ""<Left>
 
-" if file extension = c, then expand Enter
-" without any open brackets before into ;<enter>
-" :inoremap <CR> ;<CR>
 
 " fix annoying typos
 :com W :w
@@ -240,7 +160,6 @@ noremap <F10> :wq<CR>
 
 :map <Space> i<Space><Esc>l
 :map <BS> hx<Esc>
-
 
 
 " Indent Python in the Google way.
