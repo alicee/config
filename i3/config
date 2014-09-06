@@ -60,7 +60,6 @@ font pango:Open Sans 10
 # font pango:DejaVu Sans Mono 10
 
 
-
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+n move scratchpad
 # Show the first scratchpad window
@@ -73,7 +72,7 @@ bindsym $mod+n scratchpad show
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -160,9 +159,9 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
-# bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+# bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -212,18 +211,18 @@ bar {
   status_command conky -c /home/alice/.conkyrc
 }
 
-
 exec --no-startup-id urxvt
 exec --no-startup-id firefox
 
 # starting a specially named term automatically 
-exec --no-startup-id urxvt -name scratchpad -e "vim scratchpad.txt"
+exec --no-startup-id urxvt -name scratchpad -e zsh -c "vim -c 'startinsert'"
 # move this to scratchpad, if active
-for_window [class="urxvt" instance="scratchpad"] move scratchpad
-
+for_window [class="URxvt" instance="scratchpad"] move scratchpad
 
 # screen brightness
 bindsym Mod4+Up exec bright more 
 bindsym Mod4+Down exec bright less
+
+exec_always /home/alice/config/startup.sh
 
 

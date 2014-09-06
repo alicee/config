@@ -37,6 +37,7 @@ export SAVEHIST=100000
 export HISTIGNORE=ls
 
 
+
 # Prompt
 . ~/.zshprompt
 setprompt
@@ -71,6 +72,7 @@ export PYTHONPATH=$GAE_SDK_ROOT/google
 eval `dircolors`
 
 # ---[ Alias Section ]-------------------------------------------------
+alias skype='LD_PRELOAD=/usr/lib32/libv4l/v4l1compat.so skype'
 alias top='top -c'
 alias pastebin='wgetpaste -X'
 alias grin='grin -i'
@@ -294,10 +296,11 @@ setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
 
 function bright () {
-  loc='/sys/class/backlight/acpi_video0/brightness'
-  max=`cat /sys/class/backlight/acpi_video0/max_brightness`
+  loc='/sys/class/backlight/intel_backlight/device/intel_backlight/brightness'
+  maxloc='/sys/class/backlight/intel_backlight/device/intel_backlight/max_brightness'
   min=1
   current=`cat $loc`
+  max=`cat $maxloc`
   if [[ $1 == 'more' && $current -ne $max ]]; then
     new=$(($current+1))
   elif [[ $1 == 'less' && $current -ne $min ]]; then
@@ -305,7 +308,8 @@ function bright () {
   else 
     new=$(($current))
   fi
-  echo $new | sudo tee /sys/class/backlight/acpi_video0/brightness >> /dev/null
+  echo $new | sudo tee $loc >> /dev/null 
+  #/sys/class/backlight/acpi_video0/brightness >> /dev/null
 }
 
 function zzip {
