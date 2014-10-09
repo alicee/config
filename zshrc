@@ -78,7 +78,7 @@ alias pastebin='wgetpaste -X'
 alias grin='grin -i'
 alias n='cd ~/nearwoo/nearwoo_home && clear'
 alias p='cd ~/pagewoo_source/src && clear'
-alias rtb='cd ~/pagewoo_rtb/rtb && clear'
+alias r='cd ~/rtb/rtb && clear'
 alias python='python2'
 alias ipython='ipython2'
 alias ipy='ipython2'
@@ -364,3 +364,5 @@ bindkey . rationalise-dot
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 # unset config_file
+#
+#

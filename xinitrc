@@ -11,4 +11,7 @@ syndaemon -k -i 0.25 -d &
 feh --bg-scale ~/.background
 # workaround for non-working systemctl mongodb
 sudo mongod --config /etc/mongodb.conf &
+# somehow it's not setting the env variable for gpg agent
+gpg-agent --daemon --write-env-file ${HOME}/.gpg-agent-info
+export `cat ${HOME}/.gpg-agent-info`
 exec i3 
