@@ -321,6 +321,23 @@ function zzip {
 }
 
 
+DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+
+DIRSTACKSIZE=20
+setopt autopushd pushdsilent pushdtohome
+## Remove duplicate entries
+setopt pushdignoredups
+## This reverts the +/- operators.
+setopt pushdminus
+
+
 compctl -f -k'directory pattern' lg
 function lg() {
   if [[ $# -eq 1 ]]; then 
@@ -330,6 +347,12 @@ function lg() {
     ls -1 $1 | grep -i $2
   fi
 }
+
+
+function rev () {
+  tee ~/.STDIN | wc -l | xargs expr 1 + | xargs tput il && cat ~/.STDIN;
+}
+
 
 function remind () {
   cat ~/reminder | grep -i -e $1
